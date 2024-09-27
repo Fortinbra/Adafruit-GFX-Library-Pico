@@ -29,8 +29,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_I2CDevice.h>
 #include <Adafruit_SPIDevice.h>
-#include <SPI.h>
-#include <Wire.h>
+
 
 #define GRAYOLED_SETCONTRAST 0x81   ///< Generic contrast for almost all OLEDs
 #define GRAYOLED_NORMALDISPLAY 0xA6 ///< Generic non-invert for almost all OLEDs
