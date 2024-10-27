@@ -2,14 +2,14 @@
 #define _ADAFRUIT_GFX_H
 
 #include "gfxfont.h"
-
-#include <Adafruit_I2CDevice.h>
-#include <Adafruit_SPIDevice.h>
+#include "pico/stdio.h"
+#include <stdio.h>
 
 /// A generic graphics superclass that can handle all sorts of drawing. At a
 /// minimum you can subclass and provide drawPixel(). At a maximum you can do a
 /// ton of overriding to optimize. Used for any/all Adafruit displays!
-class Adafruit_GFX : public Print {
+class Adafruit_GFX
+{
 
 public:
   Adafruit_GFX(int16_t w, int16_t h); // Constructor
@@ -107,10 +107,10 @@ public:
                 uint16_t bg, uint8_t size_x, uint8_t size_y);
   void getTextBounds(const char *string, int16_t x, int16_t y, int16_t *x1,
                      int16_t *y1, uint16_t *w, uint16_t *h);
-  void getTextBounds(const __FlashStringHelper *s, int16_t x, int16_t y,
-                     int16_t *x1, int16_t *y1, uint16_t *w, uint16_t *h);
-  void getTextBounds(const String &str, int16_t x, int16_t y, int16_t *x1,
-                     int16_t *y1, uint16_t *w, uint16_t *h);
+  // void getTextBounds(const __FlashStringHelper *s, int16_t x, int16_t y,
+  //                    int16_t *x1, int16_t *y1, uint16_t *w, uint16_t *h);
+  // void getTextBounds(const String &str, int16_t x, int16_t y, int16_t *x1,
+  //                    int16_t *y1, uint16_t *w, uint16_t *h);
   void setTextSize(uint8_t s);
   void setTextSize(uint8_t sx, uint8_t sy);
   void setFont(const GFXfont *f = NULL);
@@ -122,7 +122,8 @@ public:
     @param  y    Y coordinate in pixels
   */
   /**********************************************************************/
-  void setCursor(int16_t x, int16_t y) {
+  void setCursor(int16_t x, int16_t y)
+  {
     cursor_x = x;
     cursor_y = y;
   }
@@ -144,7 +145,8 @@ public:
     @param   bg  16-bit 5-6-5 Color to draw background/fill with
   */
   /**********************************************************************/
-  void setTextColor(uint16_t c, uint16_t bg) {
+  void setTextColor(uint16_t c, uint16_t bg)
+  {
     textcolor = c;
     textbgcolor = bg;
   }
@@ -174,12 +176,14 @@ public:
   /**********************************************************************/
   void cp437(bool x = true) { _cp437 = x; }
 
-  using Print::write;
-#if ARDUINO >= 100
-  virtual size_t write(uint8_t);
-#else
-  virtual void write(uint8_t);
-#endif
+  // Replace Print::write with a custom write function
+  virtual size_t write(uint8_t c)
+  {
+    // Implement your custom write function here
+    // For example, you can use printf to print the character
+    printf("%c", c);
+    return 1;
+  }
 
   /************************************************************************/
   /*!
@@ -243,7 +247,8 @@ protected:
 };
 
 /// A simple drawn button UI element
-class Adafruit_GFX_Button {
+class Adafruit_GFX_Button
+{
 
 public:
   Adafruit_GFX_Button(void);
@@ -272,7 +277,8 @@ public:
     @param    p  True for pressed, false for not.
   */
   /**********************************************************************/
-  void press(bool p) {
+  void press(bool p)
+  {
     laststate = currstate;
     currstate = p;
   }
@@ -301,7 +307,8 @@ private:
 };
 
 /// A GFX 1-bit canvas context for graphics
-class GFXcanvas1 : public Adafruit_GFX {
+class GFXcanvas1 : public Adafruit_GFX
+{
 public:
   GFXcanvas1(uint16_t w, uint16_t h);
   ~GFXcanvas1(void);
@@ -332,7 +339,8 @@ private:
 };
 
 /// A GFX 8-bit canvas context for graphics
-class GFXcanvas8 : public Adafruit_GFX {
+class GFXcanvas8 : public Adafruit_GFX
+{
 public:
   GFXcanvas8(uint16_t w, uint16_t h);
   ~GFXcanvas8(void);
@@ -357,7 +365,8 @@ protected:
 };
 
 ///  A GFX 16-bit canvas context for graphics
-class GFXcanvas16 : public Adafruit_GFX {
+class GFXcanvas16 : public Adafruit_GFX
+{
 public:
   GFXcanvas16(uint16_t w, uint16_t h);
   ~GFXcanvas16(void);

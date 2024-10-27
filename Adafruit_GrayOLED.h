@@ -24,13 +24,9 @@
 #ifndef _Adafruit_GRAYOLED_H_
 #define _Adafruit_GRAYOLED_H_
 
-// Not for ATtiny, at all
-#if !defined(__AVR_ATtiny85__) && !defined(__AVR_ATtiny84__)
-
-#include <Adafruit_GFX.h>
+#include "Adafruit_GFX.h"
 #include <Adafruit_I2CDevice.h>
 #include <Adafruit_SPIDevice.h>
-
 
 #define GRAYOLED_SETCONTRAST 0x81   ///< Generic contrast for almost all OLEDs
 #define GRAYOLED_NORMALDISPLAY 0xA6 ///< Generic non-invert for almost all OLEDs
@@ -44,9 +40,10 @@
     @brief  Class that stores state and functions for interacting with
             generic grayscale OLED displays.
 */
-class Adafruit_GrayOLED : public Adafruit_GFX {
+class Adafruit_GrayOLED : public Adafruit_GFX
+{
 public:
-  Adafruit_GrayOLED(uint8_t bpp, uint16_t w, uint16_t h, TwoWire *twi = &Wire,
+  Adafruit_GrayOLED(uint8_t bpp, uint16_t w, uint16_t h, i2c_inst_t *twi = i2c0,
                     int8_t rst_pin = -1, uint32_t preclk = 400000,
                     uint32_t postclk = 100000);
   Adafruit_GrayOLED(uint8_t bpp, uint16_t w, uint16_t h, int8_t mosi_pin,
@@ -80,7 +77,7 @@ protected:
   Adafruit_I2CDevice *i2c_dev = NULL; ///< The I2C interface BusIO device
   int32_t i2c_preclk = 400000,        ///< Configurable 'high speed' I2C rate
       i2c_postclk = 100000;           ///< Configurable 'low speed' I2C rate
-  uint8_t *buffer = NULL; ///< Internal 1:1 framebuffer of display mem
+  uint8_t *buffer = NULL;             ///< Internal 1:1 framebuffer of display mem
 
   int16_t window_x1, ///< Dirty tracking window minimum x
       window_y1,     ///< Dirty tracking window minimum y
@@ -93,8 +90,7 @@ protected:
 
   uint8_t _bpp = 1; ///< Bits per pixel color for this display
 private:
-  TwoWire *_theWire = NULL; ///< The underlying hardware I2C
+  i2c_inst_t *_theWire = NULL; ///< The underlying hardware I2C
 };
 
-#endif // end __AVR_ATtiny85__ __AVR_ATtiny84__
 #endif // _Adafruit_GrayOLED_H_

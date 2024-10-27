@@ -1,3 +1,7 @@
+#include "pico/stdio.h"
+#include "pico/stdlib.h"
+#include <stdio.h>
+
 // Font structures for newer Adafruit_GFX (1.1 and later).
 // Example fonts are included in 'Fonts' directory.
 // To use a font in your Arduino sketch, #include the corresponding .h
@@ -8,7 +12,8 @@
 #define _GFXFONT_H_
 
 /// Font data stored PER GLYPH
-typedef struct {
+typedef struct
+{
   uint16_t bitmapOffset; ///< Pointer into GFXfont->bitmap
   uint8_t width;         ///< Bitmap dimensions in pixels
   uint8_t height;        ///< Bitmap dimensions in pixels
@@ -18,7 +23,8 @@ typedef struct {
 } GFXglyph;
 
 /// Data stored for FONT AS A WHOLE
-typedef struct {
+typedef struct
+{
   uint8_t *bitmap;  ///< Glyph bitmaps, concatenated
   GFXglyph *glyph;  ///< Glyph array
   uint16_t first;   ///< ASCII extents (first char)
