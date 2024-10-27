@@ -6,7 +6,6 @@ cmake_minimum_required(VERSION 3.13)
 
 add_library(Adafruit_GFX 
 Adafruit_GFX.cpp
-Adafruit_GrayOLED.cpp
 Adafruit_SPITFT.cpp
 glcdfont.c
 )

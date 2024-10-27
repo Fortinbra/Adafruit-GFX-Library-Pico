@@ -22,7 +22,7 @@
 
 #include "Adafruit_GFX.h"
 #include "hardware/gpio.h"
-#include "Adafruit_BusIO/Adafruit_SPIDevice.h"
+#include "../Adafruit_BusIO/Adafruit_SPIDevice.h"
 
 // HARDWARE CONFIG ---------------------------------------------------------
 

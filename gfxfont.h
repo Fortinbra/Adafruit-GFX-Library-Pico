@@ -1,7 +1,3 @@
-#include "pico/stdio.h"
-#include "pico/stdlib.h"
-#include <stdio.h>
-
 // Font structures for newer Adafruit_GFX (1.1 and later).
 // Example fonts are included in 'Fonts' directory.
 // To use a font in your Arduino sketch, #include the corresponding .h
@@ -10,6 +6,9 @@
 
 #ifndef _GFXFONT_H_
 #define _GFXFONT_H_
+
+#include "pico/stdlib.h"
+#include <stdint.h>
 
 /// Font data stored PER GLYPH
 typedef struct

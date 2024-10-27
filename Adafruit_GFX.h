@@ -2,8 +2,7 @@
 #define _ADAFRUIT_GFX_H
 
 #include "gfxfont.h"
-#include "pico/stdio.h"
-#include <stdio.h>
+#include "pico/stdlib.h"
 
 /// A generic graphics superclass that can handle all sorts of drawing. At a
 /// minimum you can subclass and provide drawPixel(). At a maximum you can do a
@@ -177,13 +176,7 @@ public:
   void cp437(bool x = true) { _cp437 = x; }
 
   // Replace Print::write with a custom write function
-  virtual size_t write(uint8_t c)
-  {
-    // Implement your custom write function here
-    // For example, you can use printf to print the character
-    printf("%c", c);
-    return 1;
-  }
+  virtual size_t write(uint8_t c);
 
   /************************************************************************/
   /*!
